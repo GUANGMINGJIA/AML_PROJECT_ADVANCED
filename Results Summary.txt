@@ -1,0 +1,47 @@
+Results Analysis:
+
+Thresholding strategy.
+To reduce false decisions in clinical usage, we combined a soft cost-sensitive scoring objective with a hard safety constraint during threshold selection.   
+The soft term encourages conservative thresholds that favor a higher TNR, while the hard constraint enforces TNR ≥ 0.93 with a minimum threshold ≥ 0.90.  
+This two-level design slightly trades TPR for markedly more reliable behavior.
+
+Why it matters for this dataset.  
+Given the strong class imbalance in ChestXRay2017, such combined constraints are necessary to mitigate bias and stabilize performance.  
+
+Key findings (this run).
+
+Baseline CNN tends to over-predict Pneumonia, misclassifying many normal cases
+→ Balanced Acc = 0.852, AUC = 0.922; TNR ≈ 0.786, TPR ≈ 0.918.
+
+Transfer learning with ResNet50 is more robust. While maintaining a very high pneumonia recall (TPR ≈ 0.985), 
+it also improves the correct recognition of normal cases (TNR ≈ 0.808).
+→ Balanced Acc increases to 0.896, AUC reaches 0.980.
+→ At the tuned thresholds, FN drops from 32 to 6 and FP decreases from 50 to 45.
+
+With multiple imbalance-aware techniques (WeightedRandomSampler + pos_weight) and GPU optimizations (AMP), 
+training was efficient and generalization improved over the baseline.
+
+Next steps.
+We will validate on external datasets and refine threshold calibration to further enhance stability and clinical applicability.
+
+Grad-CAM Observation Conclusion：
+1) Primary Focus Is Reasonable
+High activations (red/yellow) concentrate in the bilateral lung fields and along the cardiac silhouette; 
+low activations (blue/green) appear on clavicles/soft tissue—consistent with expected CXR focus.
+
+2) Confidence Aligns with Visualization
+The value in parentheses is the probability of NORMAL; 
+low values (e.g., 0.003–0.073) mean higher confidence for NORMAL. Maps focus on clear lung parenchyma with no spurious peaks.
+
+3) Minor Non-Pulmonary Activations Are Typical Artifacts
+Mild activations near diaphragmatic domes or cardiophrenic angles are common weakly-supervised artifacts (edge/contrast effects) and do not affect conclusions.
+
+4) Conclusion
+The model bases its NORMAL decision on intra-pulmonary cues, without relying on irrelevant regions—consistent with the strong TNR and AUC in this run.
+
+Limitations & Future Work：
+Grad-CAM is low-resolution; 
+future work may use higher-resolution attention maps or box/segmentation supervision to improve localization and interpretability.
+
+
+

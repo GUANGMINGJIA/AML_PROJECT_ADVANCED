@@ -1,4 +1,4 @@
-<img width="969" height="651" alt="image" src="https://github.com/user-attachments/assets/9bc8b6b4-ecc6-488f-9124-fb2696f87050" /><img width="1038" height="600" alt="image" src="https://github.com/user-attachments/assets/5636ae27-12ad-4cb1-b98b-8f49c4519c82" /># AML_PROJECT_ADVANCED
+# AML_PROJECT_ADVANCED
 Advanced AML project - Deep learning for chest X-ray classification (Pneumonia vs Normal)
 # **Chest X-ray Image Classification: A Deep Learning Analysis**
 **`Domain: Medical Imaging`**
@@ -83,7 +83,7 @@ Under the RTX 3070 environment, the overall speedup is approximately ~2×, and t
 
 ## **Results Analysis**
 ####**Thresholding strategy:**  
-To reduce false decisions in clinical usage, we combined a *soft* cost-sensitive scoring objective with a *hard* safety constraint during threshold selection. The soft term encourages conservative thresholds that favor a higher TNR, while the hard constraint enforces **TNR ≥ 0.93** with a **minimum threshold ≥ 0.90**. This two-level design slightly trades TPR for markedly more reliable behavior.
+To reduce false decisions in clinical usage, I combined a *soft* cost-sensitive scoring objective with a *hard* safety constraint during threshold selection. The soft term encourages conservative thresholds that favor a higher TNR, while the hard constraint enforces **TNR ≥ 0.93** with a **minimum threshold ≥ 0.90**. This two-level design slightly trades TPR for markedly more reliable behavior.
 
 **Why it matters for this dataset:**  
 Given the strong class imbalance in *ChestXRay2017*, such combined constraints are necessary to **mitigate bias and stabilize performance**.

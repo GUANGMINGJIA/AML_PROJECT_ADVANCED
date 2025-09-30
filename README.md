@@ -17,10 +17,10 @@ The goal of this project is to build a deep learning model capable of processing
 Task: ChestXRay2017 binary classification (NORMAL vs PNEUMONIA).  
 Technical features: Split into training/validation/testing sets, fixed global random seed to ensure reproducibility.
 
-##**Models**
-**Baseline**: Lightweight CNN.
-**Advanced**: ResNet-50 (pretrained on ImageNet).
-**Modified classifier head**: Linear(in_features→256) → ReLU → Dropout(0.5) → Linear(256→1)
+## **Models**  
+**Baseline**: Lightweight CNN.  
+**Advanced**: ResNet-50 (pretrained on ImageNet).  
+**Modified classifier head**: Linear(in_features→256) → ReLU → Dropout(0.5) → Linear(256→1)  
 
 ##**Class Imbalance Handling**
 To address the imbalance in ChestXRay2017, where NORMAL samples are fewer than PNEUMONIA, I adopt both **sampling-based** and **loss-based** strategies simultaneously.

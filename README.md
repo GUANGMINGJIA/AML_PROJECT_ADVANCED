@@ -82,7 +82,7 @@ Advanced, 10 epochs: 114.7 / 114.1 / 118.5 / 114.7 / 113.7 / 114.4 / 113.9 / 114
 Under the RTX 3070 environment, the overall speedup is approximately ~2×, and training becomes more stable.
 
 ## **Results Analysis**
-####**Thresholding strategy:**  
+#### **1）Thresholding strategy:**  
 To reduce false decisions in clinical usage, I combined a *soft* cost-sensitive scoring objective with a *hard* safety constraint during threshold selection.  
 The soft term encourages conservative thresholds that favor a higher TNR, while the hard constraint enforces **TNR ≥ 0.93** with a **minimum threshold ≥ 0.90**.  
 This two-level design slightly trades TPR for markedly more reliable behavior.
@@ -90,7 +90,7 @@ This two-level design slightly trades TPR for markedly more reliable behavior.
 **Why it matters for this dataset:**  
 Given the strong class imbalance in *ChestXRay2017*, such combined constraints are necessary to **mitigate bias and stabilize performance**.  
 
-#### **2）Key Findings of This Experiment: **  
+#### **2）Key Findings of This Experiment:**  
 *Baseline CNN* tends to over-predict Pneumonia, misclassifying many normal cases  
 **→ Balanced Acc = 0.852，AUC = 0.922；TNR ≈ 0.786，TPR ≈ 0.918**。  
 <img src="figs/raw_figs/Baseline_CNN_confusion_matrix_pair.png" alt="Baseline_CNN" width="696">  

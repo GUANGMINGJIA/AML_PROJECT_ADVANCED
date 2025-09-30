@@ -7,8 +7,8 @@ I selected the dataset `Advanced - 1 Chest X-Ray Images for Classification` from
 
 The goal of this project is to build a deep learning model capable of processing large-scale chest X-ray data for binary classification of pneumonia (PNEUMONIA) versus normal (NORMAL).
 
-**Technical features include: **  
-- Avoiding end-to-end black-box workflows, with implementation in the PyTorch framework.  
+**Technical features include:**     
+- Following a complete machine learning workflow, implemented with the PyTorch framework.  
 - Preprocessing of complex medical images.  
 - Optimization strategies addressing challenges of storing and processing large-scale image data.  
 - Handling class imbalance through weighted loss functions and improved sampling efficiency.

@@ -33,7 +33,7 @@ Idea: During sampling in the DataLoader, **increase the probability of selecting
 <img src="figs/formula_figs/formula_1.png" alt="公式" width="150">  
 其中<span><img src="figs/formula_figs/N1_N0.png" alt="公式" width="50">分别是正/负样本数  
 
-#### **2）Loss-based: pos_weight in BCEWithLogitsLoss**
+#### **2）Loss-based: pos_weight in BCEWithLogitsLoss（BCEWithLogitsLoss(pos_weight=…)**
 Idea: When computing the binary cross-entropy, assign **greater weight to positive (or minority) classes**, thereby strengthening the model’s learning signal for such classes.
 
 *To avoid over-correction when using WeightedRandomSampler simultaneously, I applied a softened (sqrt) version*.

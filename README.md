@@ -20,9 +20,9 @@ Technical features: Split into training/validation/testing sets, fixed global ra
 ## **Models**  
 **Baseline**: Lightweight CNN.  
 **Advanced**: ResNet-50 (pretrained on ImageNet).  
-**Modified classifier head**: Linear(in_features→256) → ReLU → Dropout(0.5) → Linear(256→1)  
+**Modified classifier head**: `Linear(in_features→256) → ReLU → Dropout(0.5) → Linear(256→1)`  
 
-##**Class Imbalance Handling**
+## **Class Imbalance Handling**  
 To address the imbalance in ChestXRay2017, where NORMAL samples are fewer than PNEUMONIA, I adopt both **sampling-based** and **loss-based** strategies simultaneously.
 
 <img src="figs/raw_figs/class_distribution.png" alt="Class Distribution" width="390"> 

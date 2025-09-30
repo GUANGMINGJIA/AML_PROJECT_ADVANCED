@@ -13,8 +13,8 @@ The goal of this project is to build a deep learning model capable of processing
 - Optimization strategies addressing challenges of storing and processing large-scale image data.  
 - Handling class imbalance through weighted loss functions and improved sampling efficiency.
 
-#**Experimental Setup and Implementation Details**
-Task: ChestXRay2017 binary classification (NORMAL vs PNEUMONIA).
+# **Experimental Setup and Implementation Details**  
+Task: ChestXRay2017 binary classification (NORMAL vs PNEUMONIA).  
 Technical features:   
 Split into training/validation/testing sets, fixed global random seed to ensure reproducibility.
 

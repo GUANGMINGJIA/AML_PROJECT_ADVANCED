@@ -48,12 +48,12 @@ Idea: When computing the binary cross-entropy, assign **greater weight to positi
 ## **Data Loading and Computational Efficiency**
 *Balancing stability and runtime efficiency in data loading strategies (Environment: Windows, SSD, RTX 3070 Laptop)*  
 #### **1） Optimal parameter configuration after repeated experiments:**  
-`batch_size`：Set to 32 for each training step, balancing speed and GPU memory usage.
-`shuffle=False`：Data order not shuffled to avoid randomness in validation/testing.
-`num_workers=4`：Use 4 worker processes for parallel data loading to improve I/O efficiency.
-`prefetch_factor=4`：Each worker prefetches 4 batches, reducing wait time.
-`pin_memory=torch.cuda.is_available()`：Lock data into page-locked memory for faster transfer to GPU.
-`drop_last=False`：Retain the last incomplete batch to ensure all samples are included during evaluation.
+`batch_size`：Set to 32 for each training step, balancing speed and GPU memory usage.  
+`shuffle=False`：Data order not shuffled to avoid randomness in validation/testing.  
+`num_workers=4`：Use 4 worker processes for parallel data loading to improve I/O efficiency.  
+`prefetch_factor=4`：Each worker prefetches 4 batches, reducing wait time.  
+`pin_memory=torch.cuda.is_available()`：Lock data into page-locked memory for faster transfer to GPU.  
+`drop_last=False`：Retain the last incomplete batch to ensure all samples are included during evaluation.  
 
 #### **2） Composite performance optimizations:**  
 `AMP（Automatic Mixed Precision）` ：Mixed precision training to improve efficiency.

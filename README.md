@@ -67,25 +67,27 @@ Allow **asynchronous data transfer** (CPU → GPU, non_blocking=True & pin_memor
 
 #### **3）Achieving up to 2× higher computational efficiency:**  
 **Computational efficiency:**  
-With the same batch size, enabling **AMP + channels_last + multi-process DataLoader** significantly shortens per-epoch training time and improves GPU utilization. 
+With the same batch size, enabling **AMP + channels_last + multi-process DataLoader** significantly shortens per-epoch training time and improves GPU utilization.  
 Advanced（before optimization）  
-Per-epoch training time (s) ≈ 251–270
+Per-epoch training time (s) ≈ 251–270  
 <img src="figs/raw_figs/TIME1.png" alt="TIME1" width="430">  
 Advanced（after optimization）  
-Per-epoch training time (s) ≈ 116–126
+Per-epoch training time (s) ≈ 116–126  
 <img src="figs/raw_figs/TIME2.png" alt="TIME2" width="430">  
 **Logs:**：  
-Advanced, 6 epochs: 265.7 / 269.6 / 261.4 / 252.8 / 256.4 / 251.3 s 
-Advanced, 10 epochs: 114.7 / 114.1 / 118.5 / 114.7 / 113.7 / 114.4 / 113.9 / 114.5 / 115.4 / 112.3 s 
-**Conclusion**:
+Advanced, 6 epochs: 265.7 / 269.6 / 261.4 / 252.8 / 256.4 / 251.3 s  
+Advanced, 10 epochs: 114.7 / 114.1 / 118.5 / 114.7 / 113.7 / 114.4 / 113.9 / 114.5 / 115.4 / 112.3 s  
+**Conclusion**:  
 Under the RTX 3070 environment, the overall speedup is approximately ~2×, and training becomes more stable.
 
 ## **Results Analysis**
 ####**Thresholding strategy:**  
-To reduce false decisions in clinical usage, I combined a *soft* cost-sensitive scoring objective with a *hard* safety constraint during threshold selection. The soft term encourages conservative thresholds that favor a higher TNR, while the hard constraint enforces **TNR ≥ 0.93** with a **minimum threshold ≥ 0.90**. This two-level design slightly trades TPR for markedly more reliable behavior.
+To reduce false decisions in clinical usage, I combined a *soft* cost-sensitive scoring objective with a *hard* safety constraint during threshold selection.  
+The soft term encourages conservative thresholds that favor a higher TNR, while the hard constraint enforces **TNR ≥ 0.93** with a **minimum threshold ≥ 0.90**.  
+This two-level design slightly trades TPR for markedly more reliable behavior.
 
 **Why it matters for this dataset:**  
-Given the strong class imbalance in *ChestXRay2017*, such combined constraints are necessary to **mitigate bias and stabilize performance**.
+Given the strong class imbalance in *ChestXRay2017*, such combined constraints are necessary to **mitigate bias and stabilize performance**.  
 
 #### **2）Key Findings of This Experiment: **  
 *Baseline CNN* tends to over-predict Pneumonia, misclassifying many normal cases  
@@ -96,18 +98,18 @@ Given the strong class imbalance in *ChestXRay2017*, such combined constraints a
 → At the tuned thresholds, **FN drops from 32 to 6 and FP decreases from 50 to 45**.  
 <img src="figs/raw_figs/Advanced_ResNet50_confusion_matrix_pair.png" alt="Advanced_ResNet50" width="696">  
 
-With techniques such as **WeightedRandomSampler + pos_weight** for **class imbalance** handling, and **AMP + GPU acceleration**, the advanced model achieves **higher training efficiency** and **better generalization** compared to the baseline.
+With techniques such as **WeightedRandomSampler + pos_weight** for **class imbalance** handling, and **AMP + GPU acceleration**, the advanced model achieves **higher training efficiency** and **better generalization** compared to the baseline.  
 
-Future Work:
+Future Work:  
 Plan to incorporate **external datasets** for further validation, refine the thresholding strategy, and further improve stability and clinical applicability.
 
-#### **3）Explainability Analysis (Grad-CAM Observations):** 
+#### **3）Explainability Analysis (Grad-CAM Observations):**  
 1) *Primary Focus Is Reasonable*:  
-High activations (red/yellow) concentrate in the **bilateral lung fields** and along the **cardiac silhouette**; low activations (blue/green) appear on clavicles/soft tissue—consistent with expected CXR focus.
+High activations (red/yellow) concentrate in the **bilateral lung fields** and along the **cardiac silhouette**; low activations (blue/green) appear on clavicles/soft tissue—consistent with expected CXR focus.  
 2) *Confidence Aligns with Visualization*:  
-The value in parentheses is the **probability of NORMAL**; low values (e.g., 0.003–0.073) mean **higher confidence for NORMAL**. Maps focus on **clear lung parenchyma** with no spurious peaks.
+The value in parentheses is the **probability of NORMAL**; low values (e.g., 0.003–0.073) mean **higher confidence for NORMAL**. Maps focus on **clear lung parenchyma** with no spurious peaks.  
 3) *Minor Non-Pulmonary Activations Are Typical Artifacts*:  
-Mild activations near **diaphragmatic domes** or **cardiophrenic angles** are common weakly-supervised artifacts (edge/contrast effects) and do not affect conclusions.
+Mild activations near **diaphragmatic domes** or **cardiophrenic angles** are common weakly-supervised artifacts (edge/contrast effects) and do not affect conclusions.  
 <img src="figs/raw_figs/grad_cam_2x2.png" alt="Grad-CAM" width="400">   
 
 *Conclusion*:  

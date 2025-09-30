@@ -33,7 +33,7 @@ Idea: During sampling in the DataLoader, **increase the probability of selecting
 <img src="figs/formula_figs/formula_1.png" alt="公式" width="150">  
 其中<span><img src="figs/formula_figs/N1_N0.png" alt="公式" width="50">分别是正/负样本数  
 
-#### **2）Loss-based: pos_weight in BCEWithLogitsLoss（BCEWithLogitsLoss(pos_weight=…)**
+#### **2）Loss-based: pos_weight in BCEWithLogitsLoss**
 Idea: When computing the binary cross-entropy, assign **greater weight to positive (or minority) classes**, thereby strengthening the model’s learning signal for such classes.
 
 *To avoid over-correction when using WeightedRandomSampler simultaneously, I applied a softened (sqrt) version*.
@@ -46,7 +46,8 @@ Idea: When computing the binary cross-entropy, assign **greater weight to positi
 <img src="figs/raw_figs/train_samples.png" alt="train_samples" width="390">  
 
 ## **Data Loading and Computational Efficiency**
-*Balancing stability and runtime efficiency in data loading strategies (Environment: Windows, SSD, RTX 3070 Laptop)*  
+*Balancing stability and runtime efficiency in data loading strategies*  
+*(Environment: Windows, SSD, RTX 3070 Laptop)*  
 #### **1） Optimal parameter configuration after repeated experiments:**  
 `batch_size`：Set to 32 for each training step, balancing speed and GPU memory usage.  
 `shuffle=False`：Data order not shuffled to avoid randomness in validation/testing.  

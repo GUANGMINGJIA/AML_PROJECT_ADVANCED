@@ -15,8 +15,7 @@ The goal of this project is to build a deep learning model capable of processing
 
 # **Experimental Setup and Implementation Details**  
 Task: ChestXRay2017 binary classification (NORMAL vs PNEUMONIA).  
-Technical features:   
-Split into training/validation/testing sets, fixed global random seed to ensure reproducibility.
+Technical features: Split into training/validation/testing sets, fixed global random seed to ensure reproducibility.
 
 ##**Models**
 **Baseline**: Lightweight CNN.

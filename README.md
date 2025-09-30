@@ -57,13 +57,13 @@ Idea: When computing the binary cross-entropy, assign **greater weight to positi
 
 #### **2） Composite performance optimizations:**  
 `AMP（Automatic Mixed Precision）` ：Mixed precision training to improve efficiency.
-`channels_last`：Tensor memory layout changed from the default NCHW to NHWC (channel dimension last).
+`channels_last`：Tensor memory layout changed from the default NCHW to NHWC (channel dimension last).  
 *Better optimized for GPU Tensor Core, especially in convolution operations.*  
-`cuDNN benchmark`： cuDNN automatically tests available convolution algorithms and selects the fastest one.
+`cuDNN benchmark`： cuDNN automatically tests available convolution algorithms and selects the fastest one.  
 *Further accelerates convolution (especially when input sizes are fixed).*。  
-Additionally,
-Enable **non-deterministic algorithms** (cudnn.deterministic = False).
-Allow **asynchronous data transfer** (CPU → GPU, non_blocking=True & pin_memory=True).
+Additionally,  
+Enable **non-deterministic algorithms** (cudnn.deterministic = False).  
+Allow **asynchronous data transfer** (CPU → GPU, non_blocking=True & pin_memory=True).  
 
 #### **3）Achieving up to 2× higher computational efficiency:**  
 **Computational efficiency:**  

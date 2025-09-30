@@ -93,11 +93,11 @@ Given the strong class imbalance in *ChestXRay2017*, such combined constraints a
 #### **2）Key Findings of This Experiment:**  
 *Baseline CNN* tends to over-predict Pneumonia, misclassifying many normal cases  
 **→ Balanced Acc = 0.852，AUC = 0.922；TNR ≈ 0.786，TPR ≈ 0.918**。  
-<img src="figs/raw_figs/Baseline_CNN_confusion_matrix_pair.png" alt="Baseline_CNN" width="696">  
+<img src="figs/raw_figs/Baseline_CNN_confusion_matrix_pair.png" alt="Baseline_CNN" width="720">  
 *Transfer learning with ResNet50* is **more robust**. While maintaining a **very high pneumonia recall (TPR ≈ 0.985)**, it also improves the correct recognition of normal cases **(TNR ≈ 0.808)**.  
 **→ Balanced Acc increases to 0.896, AUC reaches 0.980**.  
 → At the tuned thresholds, **FN drops from 32 to 6 and FP decreases from 50 to 45**.  
-<img src="figs/raw_figs/Advanced_ResNet50_confusion_matrix_pair.png" alt="Advanced_ResNet50" width="696">  
+<img src="figs/raw_figs/Advanced_ResNet50_confusion_matrix_pair.png" alt="Advanced_ResNet50" width="720">  
 
 With techniques such as **WeightedRandomSampler + pos_weight** for **class imbalance** handling, and **AMP + GPU acceleration**, the advanced model achieves **higher training efficiency** and **better generalization** compared to the baseline.  
 

@@ -56,7 +56,7 @@ Idea: When computing the binary cross-entropy, assign **greater weight to positi
 `drop_last=False`：Retain the last incomplete batch to ensure all samples are included during evaluation.  
 
 #### **2） Composite performance optimizations:**  
-`AMP（Automatic Mixed Precision）` ：Mixed precision training to improve efficiency.
+`AMP（Automatic Mixed Precision）` ：Mixed precision training to improve efficiency.  
 `channels_last`：Tensor memory layout changed from the default NCHW to NHWC (channel dimension last).  
 *Better optimized for GPU Tensor Core, especially in convolution operations.*  
 `cuDNN benchmark`： cuDNN automatically tests available convolution algorithms and selects the fastest one.  

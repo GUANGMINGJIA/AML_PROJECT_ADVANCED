@@ -76,8 +76,7 @@ Per-epoch training time (s) ≈ 251–270
 Per-epoch training time (s) ≈ 116–126  
 <img src="figs/raw_figs/TIME2.png" alt="TIME2" width="430">  
 **Conclusion**:  
-Under the RTX 3070 environment, the overall speedup is **approximately ~2×**, and training becomes more stable.  
-
+Under the RTX 3070 environment, the overall speedup is **approximately ~2×**, and training becomes more stable.
 ## **Results Analysis**
 #### **1）Thresholding strategy:**  
 To reduce false decisions in clinical usage, I combined a *soft* cost-sensitive scoring objective with a *hard* safety constraint during threshold selection.  

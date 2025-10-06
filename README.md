@@ -69,10 +69,10 @@ Allow **asynchronous data transfer** (CPU → GPU, non_blocking=True & pin_memor
 #### **3）Achieving up to 2× higher computational efficiency:**  
 **Computational efficiency:**  
 With the same batch size, enabling **AMP + channels_last + multi-process DataLoader** significantly shortens per-epoch training time and improves GPU utilization.  
-Advanced（before optimization）  
+*Advanced（before optimization）*  
 Per-epoch training time (s) ≈ 251–270  
 <img src="figs/raw_figs/TIME1.png" alt="TIME1" width="430">  
-Advanced（after optimization）  
+*Advanced（after optimization）*  
 Per-epoch training time (s) ≈ 116–126  
 <img src="figs/raw_figs/TIME2.png" alt="TIME2" width="430">  
 **Conclusion**:  

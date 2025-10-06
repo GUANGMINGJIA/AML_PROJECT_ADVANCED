@@ -75,7 +75,6 @@ Per-epoch training time (s) ≈ 251–270
 Advanced（after optimization）  
 Per-epoch training time (s) ≈ 116–126  
 <img src="figs/raw_figs/TIME2.png" alt="TIME2" width="430">  
-
 **Conclusion**:  
 Under the RTX 3070 environment, the overall speedup is **approximately ~2×**, and training becomes more stable.
 

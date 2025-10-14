@@ -45,38 +45,6 @@ Idea: When computing the binary cross-entropy, assign **greater weight to positi
 <img src="figs/raw_figs/test_samples.png" alt="test_samples" width="390">  
 <img src="figs/raw_figs/train_samples.png" alt="train_samples" width="390">  
 
-## **Data Loading and Computational Efficiency**
-*Balancing stability and runtime efficiency in data loading strategies*  
-*(Environment: Windows, SSD, RTX 3070 Laptop)*  
-#### **1） Optimal parameter configuration after repeated experiments:**  
-`batch_size`：Set to 32 for each training step, balancing speed and GPU memory usage.  
-`shuffle=False`：Data order not shuffled to avoid randomness in validation/testing.  
-`num_workers=4`：Use 4 worker processes for parallel data loading to improve I/O efficiency.  
-`prefetch_factor=4`：Each worker prefetches 4 batches, reducing wait time.  
-`pin_memory=torch.cuda.is_available()`：Lock data into page-locked memory for faster transfer to GPU.  
-`drop_last=False`：Retain the last incomplete batch to ensure all samples are included during evaluation.  
-
-#### **2） Composite performance optimizations:**  
-`AMP（Automatic Mixed Precision）` ：Mixed precision training to improve efficiency.  
-`channels_last`：Tensor memory layout changed from the default NCHW to NHWC (channel dimension last).  
-*Better optimized for GPU Tensor Core, especially in convolution operations.*  
-`cuDNN benchmark`： cuDNN automatically tests available convolution algorithms and selects the fastest one.  
-*Further accelerates convolution (especially when input sizes are fixed).*。  
-Additionally,  
-Enable **non-deterministic algorithms** (cudnn.deterministic = False).  
-Allow **asynchronous data transfer** (CPU → GPU, non_blocking=True & pin_memory=True).  
-
-#### **3）Achieving up to 2× higher computational efficiency:**  
-**Computational efficiency:**  
-With the same batch size, enabling **AMP + channels_last + multi-process DataLoader** significantly shortens per-epoch training time and improves GPU utilization.  
-*Advanced（before optimization）*  
-Per-epoch training time (s) ≈ 251–270  
-<img src="figs/raw_figs/TIME1.png" alt="TIME1" width="430">  
-*Advanced（after optimization）*  
-Per-epoch training time (s) ≈ 116–126  
-<img src="figs/raw_figs/TIME2.png" alt="TIME2" width="430">  
-**Conclusion**:  
-Under the RTX 3070 environment, the overall speedup is **approximately ~2×**, and training becomes more stable.  
 
 ## **Results Analysis**
 #### **1）Thresholding strategy:**  
@@ -114,3 +82,37 @@ Mild activations near **diaphragmatic domes** or **cardiophrenic angles** are co
 The model bases its **NORMAL** decision on **intra-pulmonary cues, without relying on irrelevant regions**—consistent with the strong TNR and AUC in this run.
 **Limitations & Future Work**:  
 Grad-CAM is low-resolution; future work may use **higher-resolution attention maps** or **box/segmentation supervision** to improve localization and interpretability.
+
+
+## **Data Loading and Computational Efficiency**
+*Balancing stability and runtime efficiency in data loading strategies*  
+*(Environment: Windows, SSD, RTX 3070 Laptop)*  
+#### **1） Optimal parameter configuration after repeated experiments:**  
+`batch_size`：Set to 32 for each training step, balancing speed and GPU memory usage.  
+`shuffle=False`：Data order not shuffled to avoid randomness in validation/testing.  
+`num_workers=4`：Use 4 worker processes for parallel data loading to improve I/O efficiency.  
+`prefetch_factor=4`：Each worker prefetches 4 batches, reducing wait time.  
+`pin_memory=torch.cuda.is_available()`：Lock data into page-locked memory for faster transfer to GPU.  
+`drop_last=False`：Retain the last incomplete batch to ensure all samples are included during evaluation.  
+
+#### **2） Composite performance optimizations:**  
+`AMP（Automatic Mixed Precision）` ：Mixed precision training to improve efficiency.  
+`channels_last`：Tensor memory layout changed from the default NCHW to NHWC (channel dimension last).  
+*Better optimized for GPU Tensor Core, especially in convolution operations.*  
+`cuDNN benchmark`： cuDNN automatically tests available convolution algorithms and selects the fastest one.  
+*Further accelerates convolution (especially when input sizes are fixed).*。  
+Additionally,  
+Enable **non-deterministic algorithms** (cudnn.deterministic = False).  
+Allow **asynchronous data transfer** (CPU → GPU, non_blocking=True & pin_memory=True).  
+
+#### **3）Achieving up to 2× higher computational efficiency:**  
+**Computational efficiency:**  
+With the same batch size, enabling **AMP + channels_last + multi-process DataLoader** significantly shortens per-epoch training time and improves GPU utilization.  
+*Advanced（before optimization）*  
+Per-epoch training time (s) ≈ 251–270  
+<img src="figs/raw_figs/TIME1.png" alt="TIME1" width="430">  
+*Advanced（after optimization）*  
+Per-epoch training time (s) ≈ 116–126  
+<img src="figs/raw_figs/TIME2.png" alt="TIME2" width="430">  
+**Conclusion**:  
+Under the RTX 3070 environment, the overall speedup is **approximately ~2×**, and training becomes more stable.  

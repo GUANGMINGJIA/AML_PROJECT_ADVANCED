@@ -76,7 +76,8 @@ High activations (red/yellow) concentrate in the **bilateral lung fields** and a
 The value in parentheses is the **probability of NORMAL**; low values (e.g., 0.003–0.073) mean **higher confidence for NORMAL**. Maps focus on **clear lung parenchyma** with no spurious peaks.  
 3) *Minor Non-Pulmonary Activations Are Typical Artifacts*:  
 Mild activations near **diaphragmatic domes** or **cardiophrenic angles** are common weakly-supervised artifacts (edge/contrast effects) and do not affect conclusions.  
-<img src="figs/raw_figs/grad_cam_2x2.png" alt="Grad-CAM" width="400">
+   <img src="figs/raw_figs/grad_cam_2x2.png" alt="Grad-CAM" width="400">
+
 *Conclusion*:  
 The model bases its **NORMAL** decision on **intra-pulmonary cues, without relying on irrelevant regions**—consistent with the strong TNR and AUC in this run.
 **Limitations & Future Work**:  
